@@ -29,6 +29,10 @@ public class ApiRest {
 
     @PostMapping(path="/post")
     public @ResponseBody String createClient(@RequestParam(name = "name") String name,@RequestParam(name = "segment") String segment) {
+        if(clientRepository.findByName(name) != null) {
+            return "Cliente ja existe";
+        }
+        
         Client client = new Client();
         client.setName(name);
         client.setSegment(segment);
