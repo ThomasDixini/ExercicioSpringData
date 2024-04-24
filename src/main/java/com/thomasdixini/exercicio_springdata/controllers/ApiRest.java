@@ -1,6 +1,7 @@
 package com.thomasdixini.exercicio_springdata.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class ApiRest {
         clientRepository.save(client);
 
         return "Criado";
+    }
+
+    @GetMapping(path="/getsegments")
+    public @ResponseBody List<Client> listClientPerSegment(@RequestParam(name="segment") String segment) {
+        return clientRepository.findBySegmentOrderByName(segment);
     }
 }
